@@ -30,7 +30,7 @@ function render(currentRound, onCellClick, onRightClick, onRestartClick) {
 
   fieldDiv.innerHTML = "";
   infoDiv.innerHTML = "";
-  minesDiv.innerHTML = `💣: ${minesRemaining}`;
+  minesDiv.innerHTML = `💣 ${minesRemaining}`;
 
   field.forEach((row, i) => {
     const rowDiv = document.createElement("div");
