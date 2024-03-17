@@ -62,7 +62,7 @@ function createAndFillField(fieldSize, minesAmount) {
   return field;
 }
 
-function updateMinesRemaining() {
+function updateMinesRemaining(currentRound) {
   const { field, flagsField, fieldSize, minesAmount } = currentRound;
 
   let minesRemaining = minesAmount;
@@ -75,14 +75,15 @@ function updateMinesRemaining() {
     }
   }
 
-  currentRound.minesRemaining = minesRemaining;
+  return { ...currentRound, minesRemaining };
 }
 
-function checkForWin() {
+function checkForWin(currentRound) {
   const { field, fieldSize, visitedField, minesRemaining } = currentRound;
 
   if (minesRemaining === 0) {
-    return (currentRound.result.type = "win");
+    currentRound.result.type = "win";
+    return;
   }
 
   let isCompleted = true;
@@ -96,7 +97,7 @@ function checkForWin() {
   }
 
   if (isCompleted) {
-    currentRound.result.type = "win";
+    return { ...currentRound, result: { type: "win" } };
   }
 }
 
@@ -149,7 +150,7 @@ function onTurn(row, col) {
       }
     }
 
-    checkForWin();
+    checkForWin(currentRound);
   }
 }
 
@@ -170,6 +171,6 @@ function onFlagClick(row, col) {
     }
   }
 
-  updateMinesRemaining();
-  checkForWin();
+  updateMinesRemaining(currentRound);
+  checkForWin(currentRound);
 }

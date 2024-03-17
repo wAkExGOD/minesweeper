@@ -22,7 +22,6 @@ function render(currentRound, onCellClick, onRightClick, onRestartClick) {
     flagsField,
     result,
   } = currentRound;
-  console.log(currentRound);
 
   const fieldDiv = document.querySelector(".field");
   const infoDiv = document.querySelector(".info");
